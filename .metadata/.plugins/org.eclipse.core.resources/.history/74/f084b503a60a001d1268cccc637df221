@@ -1,0 +1,13 @@
+package com.example.messManager;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class MessManagerApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(MessManagerApplication.class, args);
+	}
+
+}

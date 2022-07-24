@@ -1,0 +1,5 @@
+package com.example.messManager.entities;
+
+public class User {
+
+}
