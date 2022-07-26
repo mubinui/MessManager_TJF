@@ -1,0 +1,47 @@
+package com.example.messManager.Controller;
+
+import java.security.Principal;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.messManager.Dao.managerRepository;
+import com.example.messManager.entities.Manager;
+
+@Controller
+@RequestMapping("/manager")
+public class ManagerController {
+	
+	@Autowired
+	private managerRepository repository;
+	
+	@ModelAttribute
+	public void commonData(Model model, Principal principal) {
+		String nameString = principal.getName();
+		
+		Manager manager = repository.getUserByUserName(nameString);
+		
+		model.addAttribute("manager", manager);
+	}
+	
+	@RequestMapping("/index")
+	public String dasboard(Model model, Principal principal) {
+		
+		return "manager/manager_dashboard";
+		
+	}
+	
+	//add member view handler
+	
+	@GetMapping("/add-member")
+	public String openAddMember(Model model) {
+		
+		model.addAttribute("title", "Add Member");
+		
+		return "manager/add_member";
+	} 
+}

@@ -1,0 +1,20 @@
+package com.example.messManager.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.example.messManager.Dao.memberRepository;
+
+@Controller
+@RequestMapping("/member")
+public class MemberController {
+	
+	@Autowired
+	private memberRepository repository;
+	
+	@RequestMapping("/index")
+	public String dasboard() {
+		return "member/member_dashboard";
+	}
+}

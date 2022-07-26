@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import net.bytebuddy.asm.Advice.This;
+
 @Entity
 @Table(name="Manager")
 public class Manager {
@@ -114,6 +116,12 @@ public class Manager {
 		this.imangeURL = imangeURL;
 	}
 	
-	
+	public boolean hasRole(String roleName) {
+		if (this.role.equals(roleName) ) {
+			return true;
+		}
+		System.out.println(this.role.toString());
+		return false;
+	}
 	
 }

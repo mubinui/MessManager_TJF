@@ -35,11 +35,5 @@ public class HomeController {
 		model.addAttribute("title", "Login - Mess Manager");
 		return "login";
 	}
-	
-	@GetMapping("/login")
-	public String goToLogin(Model model) {
-		model.addAttribute("title", "Login - Mess Manager");
-		return "login";
-	}
 
 }

@@ -94,6 +94,12 @@ public class Member {
 		this.imangeURL = imangeURL;
 	}
 	
-	
+	public boolean hasRole(String roleName) {
+		if (this.role.equals(roleName) ) {
+			return true;
+		}
+		System.out.println(this.role.toString());
+		return false;
+	}
 	
 }
