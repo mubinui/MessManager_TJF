@@ -1,0 +1,28 @@
+package com.example.messManager.Controller;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.example.messManager.Dao.managerRepository;
+import com.example.messManager.entities.Manager;
+
+@Controller
+public class ManagerController {
+	
+	@Autowired
+	private managerRepository managerRepo;
+	
+	@GetMapping("/test")
+	@ResponseBody
+	public String test() {
+		
+		Manager manager = new Manager();
+		manager.setName("nayem");
+		manager.setRole("manager");
+		manager.setPassword("1234");
+		managerRepo.save(manager);
+		return "inserted";
+	}
+}

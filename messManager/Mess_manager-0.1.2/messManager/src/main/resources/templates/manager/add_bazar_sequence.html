@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="manager/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup page</title>
+</head>
+<body>
+<section class="bg_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class= "my-card mt-5">
+                    <h1 class="text-center">Add Bazaar Sequence</h1>
+
+                    <div th:if="${session.message}" th:classappend="${session.message.type}" class="alert" role="alert">
+                        <p class="text-center" th:text="${session.message.content}"></p>
+
+                        <th:block th:text="${#session.removeAttribute('message')}"></th:block>
+                    </div>
+
+
+                        <form action="" th:action="@{/manager/bazar_sequence_add}" method="post" th:object="${BazarSequence}">
+
+                            <!-- name field -->
+
+                            <div class="form-group" th:object="${members}">
+
+                                <label for="pairMember_one_field">member1 name:</label>
+
+                                    <select name="pairMember_one" type="text" class="form-control"
+                                            id="pairMember_one_field" placeholder="enter here" required th:value="${BazarSequence.pairMember_one}">
+                                        <option value="" disabled selected>-Select Member One-</option>
+                                        <option th:each="m : ${members}"
+                                                th:value="${m.name}"
+                                                th:text="${m.name}">
+                                        </option>
+                                    </select>
+
+
+                            </div>
+
+                            <div class="form-group" th:object="${members}">
+                                <label for="pairMember_two_field">member2 name:</label>
+                                    <select name="pairMember_two" type="text" class="form-control"
+                                           id="pairMember_two_field" placeholder="enter here" required th:value="${BazarSequence.pairMember_two}">
+                                        <option value="" disabled selected>-Select Member Two-</option>
+                                        <option th:each="m : ${members}"
+                                                th:value="${m.name}"
+                                                th:text="${m.name}">
+                                        </option>
+                                    </select>
+
+                            </div>
+
+                            <!--start date-->
+                            <div class="form-group" data-provide="datepicker">
+                                <label for="startDate_field">start date:</label>
+                                <input name="startDate" type="date" class="form-control" data-date-format="yyyy-MM-dd"
+                                       id="startDate_field" placeholder="enter here" required th:value="${BazarSequence.startDate}"/>
+
+                            </div>
+
+                            <!--end date-->
+                            <div class="form-group">
+                                <label for="endDate_field">end date:</label>
+                                <input name="endDate" type="date" class="form-control" data-date-format="yyyy-MM-dd"
+                                       id="endDate_field" placeholder="enter here" required th:value="${BazarSequence.endDate}"/>
+
+                            </div>
+
+                            <!-- buttons field -->
+
+                            <div class = "container">
+                                <button type="submit" class="btn bg-primary text-white">Submit</button>
+                                <button type="reset" class="btn btn-warning">reset</button>
+                            </div>
+
+                        </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

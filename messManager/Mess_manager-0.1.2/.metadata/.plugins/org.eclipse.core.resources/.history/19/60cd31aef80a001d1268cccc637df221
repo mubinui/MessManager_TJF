@@ -1,0 +1,9 @@
+package com.example.messManager.Dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.example.messManager.entities.Manager;
+
+public interface managerRepository extends JpaRepository<Manager, Integer>{
+
+}
