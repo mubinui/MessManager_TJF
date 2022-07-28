@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="member/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <section>
+        <div class="card mr-3 ml-3">
+            <div class="card-body">
+                <h1 class="text-center">Bazaar Dates</h1>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Pair Member 1</th>
+                            <th scope="col">Pair Member 2</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Bazaar Status</th>
+                            <th scope="col">Bazaar Expenses</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="c : ${bazarSequences}">
+                            <td th:text="${c.pairMember_one}"></td>
+                            <td th:text="${c.pairMember_two}"></td>
+                            <td th:text="${c.current}"></td>
+                            <td th:text="${c.isDone}"></td>
+                            <td th:text="${c.expenses}"></td>
+                            <td>
+                                <a th:href="@{'/member/done_bazar/'+ ${c.id}}" class="btn btn-success btn-sm">Done</a>
+                                <a th:href= "@{'/member/update_bazar_expences/'+ ${c.id}}" class="btn btn-primary btn-sm">Update Expenses</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>

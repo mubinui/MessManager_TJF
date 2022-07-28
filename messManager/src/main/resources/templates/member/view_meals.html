@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="member/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+    <section>
+        <div class="card mr-3 ml-3">
+            <div class="card-body">
+                <h1 class="text-center">Meal Routine</h1>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th scope="col">Day</th>
+                            <th scope="col">Breakfast</th>
+                            <th scope="col">Lunch</th>
+                            <th scope="col">Dinner</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="c : ${meal}">
+                            <td th:text="${c.day}"></td>
+                            <td th:text="${c.breakfast}"></td>
+                            <td th:text="${c.lunch}"></td>
+                            <td th:text="${c.dinner}"></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>

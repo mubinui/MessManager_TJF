@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="member/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+<section class="bg_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="my-card mt-5">
+                    <h1 class="text-center" th:object="${bazar}" th:text="'Update Bazaar: ' + ${bazar.current}"></h1>
+
+                    <form action="" th:action="@{'/member/update_expenses/'+ ${bazar.id}}" method="post"
+                          th:object="${bazar}">
+
+                        <!--expenses field-->
+
+                        <div class="form-group">
+                            <label for="expenses">expenses:</label>
+                            <input name="expenses" type="text" class="form-control"
+                                   id="expenses" placeholder="enter here" required th:value="${bazar.expenses}"/>
+                        </div>
+
+                        <!-- buttons field -->
+
+                        <div class="container">
+                            <button type="submit" class="btn bg-primary text-white">Submit</button>
+                            <button type="reset" class="btn btn-warning">reset</button>
+                        </div>
+
+                    </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>
