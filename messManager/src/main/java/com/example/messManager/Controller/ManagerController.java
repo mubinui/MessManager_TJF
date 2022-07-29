@@ -7,6 +7,7 @@ import java.time.OffsetDateTime;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -27,6 +28,7 @@ import com.example.messManager.Dao.memberRepository;
 import com.example.messManager.entities.Manager;
 import com.example.messManager.entities.Member;
 import com.example.messManager.helper.messages;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/manager")
@@ -172,7 +174,9 @@ public class ManagerController {
 	}
 
 	@PostMapping(value = "/bazar_sequence_add")
-	public String addBazarSequence(Principal principal,@ModelAttribute("BazarSequence")BazarSequence bazarSequence, Model model)throws Exception{
+	public String addBazarSequence(Principal principal,
+								   @ModelAttribute("BazarSequence")BazarSequence bazarSequence,
+								   Model model, HttpSession session)throws Exception{
 
 		String managerEmail = principal.getName();
 		Manager manager = repository.getUserByUserName(managerEmail);
@@ -181,7 +185,7 @@ public class ManagerController {
 		String end = bazarSequence.getEndDate();
 		String start = bazarSequence.getStartDate();
 
-		//2022-07-31
+
 		Date date_end=new SimpleDateFormat("yyyy-MM-dd").parse(end);
 		Date date_start=new SimpleDateFormat("yyyy-MM-dd").parse(start);
 
@@ -201,13 +205,18 @@ public class ManagerController {
 				bazarSequence.setCurrent(currentDate);
 				bazarSequence.setIsDone("not done");
 				bazarSequence.setId(bazarSequence.getId()+1);
-				this.bazarSequenceRepository.save(bazarSequence);
+				if (Objects.equals(bazarSequence.getPairMember_one(), bazarSequence.getPairMember_two())){
+
+					session.setAttribute("message",  new messages("2 member can not be same" , "alert-danger"));
+
+				}else {
+					this.bazarSequenceRepository.save(bazarSequence);
+					session.setAttribute("message",  new messages("successful" , "alert-success"));
+
+				}
 
 			}
 		}
-
-
-
 		model.addAttribute("title","show-member");
 		model.addAttribute("members",members);
 		model.addAttribute("BazarSequence",new BazarSequence());

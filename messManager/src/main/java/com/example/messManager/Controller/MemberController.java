@@ -64,24 +64,6 @@ public class MemberController {
 		return "member/view_bazar_sequence";
 	}
 
-//	@RequestMapping("/done_bazar/{id}")
-//	public String doneBazar(Model model, @PathVariable("id") Integer id, Principal principal) {
-//
-//		Optional<BazarSequence> bazar = this.bazarSequenceRepository.findById(id);
-//		BazarSequence singlebazarSequence = bazar.get();
-//
-//		System.out.println(bazar);
-//
-//		singlebazarSequence.setIsDone("done");
-//		this.bazarSequenceRepository.save(singlebazarSequence);
-//
-//		Member member = getMember(principal,model);
-//		List<BazarSequence> bazarSequences = this.bazarSequenceRepository.getUserByName(member.getName());
-//
-//		model.addAttribute("bazarSequences", bazarSequences);
-//		return "member/view_bazar_sequence";
-//	}
-
 	@RequestMapping("/update_bazar_expences/{id}")
 	public String updateSpecificBazarExpencesView(Model model, @PathVariable("id") Integer id, Principal principal) {
 
