@@ -9,6 +9,3 @@ const toggleSideBar = () => {
         $(".content").css("margin-left","18%");
     }
 };
-$('.datepicker').datepicker({
-    format: 'MM/dd/yyyy'
-});

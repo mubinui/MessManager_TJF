@@ -31,8 +31,7 @@
                             <td th:text="${c.isDone}"></td>
                             <td th:text="${c.expenses}"></td>
                             <td>
-                                <a th:href="@{'/member/done_bazar/'+ ${c.id}}" class="btn btn-success btn-sm">Done</a>
-                                <a th:href= "@{'/member/update_bazar_expences/'+ ${c.id}}" class="btn btn-primary btn-sm">Update Expenses</a>
+                                <a th:if="${c.isDone == 'not done'}" th:href= "@{'/member/update_bazar_expences/'+ ${c.id}}" class="btn btn-primary btn-sm">Update</a>
                             </td>
                         </tr>
                         </tbody>
