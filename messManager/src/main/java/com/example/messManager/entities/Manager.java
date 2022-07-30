@@ -36,6 +36,7 @@ public class Manager {
 	private String email;
 	
 	private String phone;
+	@Column(unique = true)
 	private String mess_name;
 
 	

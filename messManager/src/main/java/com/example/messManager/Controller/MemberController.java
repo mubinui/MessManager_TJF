@@ -58,7 +58,7 @@ public class MemberController {
 	public String viewBazarDates(Model model, Principal principal) {
 
 		Member member = getMember(principal,model);
-		List<BazarSequence> bazarSequences = this.bazarSequenceRepository.getUserByName(member.getName());
+		List<BazarSequence> bazarSequences = this.bazarSequenceRepository.getUserByName(member.getName(), member.getMessName());
 		model.addAttribute("bazarSequences", bazarSequences);
 
 		return "member/view_bazar_sequence";

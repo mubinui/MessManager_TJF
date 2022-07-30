@@ -3,8 +3,6 @@ package com.example.messManager.Controller;
 import java.security.Principal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.time.OffsetDateTime;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -28,7 +26,6 @@ import com.example.messManager.Dao.memberRepository;
 import com.example.messManager.entities.Manager;
 import com.example.messManager.entities.Member;
 import com.example.messManager.helper.messages;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/manager")
@@ -85,7 +82,6 @@ public class ManagerController {
 		try {
 			
 			if (!agreement) {
-				System.out.println("agreement not accepted!!");
 				throw new Exception("agreement is not accepted");
 			}
 			if (result.hasErrors()) {
@@ -109,10 +105,17 @@ public class ManagerController {
 				return "manager/add_member";
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
-			model.addAttribute("member", member);
-			session.setAttribute("message",  new messages("something went wrong!! " + e.getMessage(), "alert-danger"));
-			return "manager/add_member";
+			Member Db_member =  memberRepository.getUserByUserName(member.getEmail());
+			if (Objects.equals(Db_member.getEmail(), member.getEmail())){
+				System.out.println("check");
+				session.setAttribute("message",  new messages("something went wrong!! Email already existed.. " + e.getMessage(), "alert-danger"));
+				return "manager/add_member";
+			}else {
+				e.printStackTrace();
+				model.addAttribute("member", member);
+				session.setAttribute("message", new messages("something went wrong!! " + e.getMessage(), "alert-danger"));
+				return "manager/add_member";
+			}
 		}
 	}
 
@@ -123,7 +126,6 @@ public class ManagerController {
 		try {
 
 			if (!agreement) {
-				System.out.println("agreement not accepted!!");
 				throw new Exception("agreement is not accepted");
 			}
 			if (result.hasErrors()) {
@@ -246,6 +248,18 @@ public class ManagerController {
 		model.addAttribute("meal",new Meal());
 
 		return "manager/add_meal";
+	}
+
+	@RequestMapping("/view_bazar_sequence")
+	public String viewBazarDates(Model model, Principal principal) {
+
+		String managerEmail = principal.getName();
+		Manager manager = repository.getUserByUserName(managerEmail);
+
+		List<BazarSequence> bazarSequences = this.bazarSequenceRepository.getBazarSequenceByMess(manager.getMessName());
+		model.addAttribute("bazarSequences", bazarSequences);
+		model.addAttribute("title","view-bazaar");
+		return "manager/view_bazar_sequence";
 	}
 
 }

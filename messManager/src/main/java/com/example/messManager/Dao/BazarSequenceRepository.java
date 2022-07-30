@@ -11,6 +11,9 @@ import java.util.List;
 
 public interface BazarSequenceRepository extends JpaRepository<BazarSequence, Integer>{
 	
-	@Query("select u from BazarSequence u where u.pairMember_one = :name or u.pairMember_two= :name")
-	public List<BazarSequence> getUserByName(@Param("name") String name);
+	@Query("select u from BazarSequence u where u.pairMember_one = :name or u.pairMember_two= :name and u.messName = :messName")
+	public List<BazarSequence> getUserByName(@Param("name") String name, @Param("messName") String messName);
+
+	@Query("select u from BazarSequence u where u.messName = :messName")
+	public List<BazarSequence> getBazarSequenceByMess(@Param("messName") String messName);
 }
