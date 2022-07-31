@@ -120,5 +120,11 @@ body{
 .cross{
 	color: crimson;
 }
+.back{
+	color: black;
+}
+.cancleBtn{
+	float: right;
+}
 
 /*about page styling*/

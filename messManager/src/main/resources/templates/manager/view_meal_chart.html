@@ -16,8 +16,8 @@
                     <thead>
                     <tr>
                         <th scope="col">Members</th>
-                        <th scope="col">Total Mess Meal</th>
                         <th scope="col">Meals Per Member</th>
+                        <th scope="col">Total Mess Meal</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -25,7 +25,7 @@
                     <tr th:each=" member : ${members}">
                         <td th:text="${member.name}"></td>
                         <td>
-                            <a th:href= "@{'/manager/view_MemberMeals/'+ ${member.id}}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i></a>
+                            <a th:href= "@{'/manager/view_MemberMeals/'+ ${member.id}}" class="btn btn-primary btn-sm"><i class="fa-solid fa-eye"></i> &nbsp View</a>
                         </td>
                         <td>--</td>
                     </tr>

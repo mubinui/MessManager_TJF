@@ -267,8 +267,6 @@ public class ManagerController {
 		Manager manager = repository.getUserByUserName(managerEmail);
 		List<Member> members = this.memberRepository.findMemberByManager(manager.getId());
 		List<MealChart> mealChart = this.mealChartRepository.getMealByMessName(manager.getMessName());
-		System.out.println(members.size());
-		System.out.println(mealChart.size());
 		model.addAttribute("members", members);
 		model.addAttribute("mealChart", mealChart);
 		return "manager/view_meal_chart";
