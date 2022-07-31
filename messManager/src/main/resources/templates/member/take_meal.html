@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="member/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+<section class="bg_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="my-card mt-5">
+                    <h4 class="text-center" th:object="${mealOfDay}" th:text="'Day of Meal: ' + ${mealOfDay.getDay()}"></h4>
+
+                    <form action="" th:action="@{'/member/meal_take'}" method="post">
+
+                        <div class="form-group" data-provide="datepicker">
+                            <label for="Date_field">Date:</label>
+                            <input name="date" type="date" class="form-control"
+                                   id="Date_field" placeholder="enter here" required />
+
+                        </div>
+
+                        <div class="form-group">
+                            <label for="breakfast">Breakfast:</label>
+                            <input name="breakfast" type="text" class="form-control"
+                                   id="breakfast" placeholder="enter here" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lunch">Lunch:</label>
+                            <input name="lunch" type="text" class="form-control"
+                                   id="lunch" placeholder="enter here" required />
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dinner">Dinner:</label>
+                            <input name="dinner" type="text" class="form-control"
+                                   id="dinner" placeholder="enter here" required />
+                        </div>
+
+                        <!-- buttons field -->
+
+                        <div class="container">
+                            <button  type="submit" class="btn bg-primary text-white">Submit</button>
+                            <button type="reset" class="btn btn-warning">reset</button>
+                        </div>
+
+                    </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

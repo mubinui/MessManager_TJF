@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="member/base::Layout(~{::section})">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="manager/base::Layout(~{::section})">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,29 +10,35 @@
 <section>
     <div class="card mr-3 ml-3">
         <div class="card-body">
-            <h1 class="text-center">Meal Routine</h1>
+            <h1 class="text-center">Meal Counts</h1>
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                     <tr>
-                        <th scope="col">Day</th>
+                        <th scope="col">Date</th>
                         <th scope="col">Breakfast</th>
-                        <th scope="col">Lunch</th>
+                        <th scope="col">lunch</th>
                         <th scope="col">Dinner</th>
-                        <th scope="col">Take Meal</th>
+                        <th scope="col">total meal</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="c : ${meal}">
-                        <td th:text="${c.day}"></td>
+                    <tr th:each="c : ${mealChart}">
+                        <td th:text="${c.date}"></td>
                         <td th:text="${c.breakfast}"></td>
                         <td th:text="${c.lunch}"></td>
                         <td th:text="${c.dinner}"></td>
-                        <td>
-                            <a th:href= "@{'/member/take_meal/'+ ${c.id}}" class="btn btn-primary btn-sm"><i class="fas fa-plus-circle"></i></a>
-                        </td>
+                        <td>--</td>
+                    </tr>
+                    <tr>
+                        <td colspan="4"></td>
+                        <td style="text-align:left" th:if="${mealChart.size() != 0}" th:object="${mealChart}" th:text="${mealChart.get(mealChart.size()-1).getMealPerPerson()}"></td>
+                        <td></td>
                     </tr>
                     </tbody>
+
+
+
                 </table>
             </div>
         </div>

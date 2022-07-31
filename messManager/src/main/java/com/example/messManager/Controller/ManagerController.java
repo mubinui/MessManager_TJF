@@ -6,14 +6,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import com.example.messManager.Dao.BazarSequenceRepository;
-import com.example.messManager.Dao.MealRepository;
-import com.example.messManager.entities.BazarSequence;
-import com.example.messManager.entities.Meal;
+import com.example.messManager.Dao.*;
+import com.example.messManager.entities.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
@@ -21,10 +20,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.messManager.Dao.managerRepository;
-import com.example.messManager.Dao.memberRepository;
-import com.example.messManager.entities.Manager;
-import com.example.messManager.entities.Member;
 import com.example.messManager.helper.messages;
 
 @Controller
@@ -42,6 +37,9 @@ public class ManagerController {
 
 	@Autowired
 	private MealRepository mealRepository;
+
+	@Autowired
+	private MealChartRepository mealChartRepository;
 
 	@Autowired
 	private BazarSequenceRepository bazarSequenceRepository;
@@ -260,6 +258,29 @@ public class ManagerController {
 		model.addAttribute("bazarSequences", bazarSequences);
 		model.addAttribute("title","view-bazaar");
 		return "manager/view_bazar_sequence";
+	}
+
+	@RequestMapping("/view_meal_chart")
+	public String viewMealChart(Model model, Principal principal) {
+
+		String managerEmail = principal.getName();
+		Manager manager = repository.getUserByUserName(managerEmail);
+		List<Member> members = this.memberRepository.findMemberByManager(manager.getId());
+		List<MealChart> mealChart = this.mealChartRepository.getMealByMessName(manager.getMessName());
+		System.out.println(members.size());
+		System.out.println(mealChart.size());
+		model.addAttribute("members", members);
+		model.addAttribute("mealChart", mealChart);
+		return "manager/view_meal_chart";
+	}
+
+	@RequestMapping("/view_MemberMeals/{id}")
+	public String viewMealChartPerMember(Model model, @PathVariable("id") Integer id) {
+
+		List<MealChart> mealChart = this.mealChartRepository.getMealByUsername(id);
+		model.addAttribute("mealChart", mealChart);
+
+		return "manager/view_meal_chart_PerMember";
 	}
 
 }

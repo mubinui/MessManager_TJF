@@ -9,3 +9,28 @@ const toggleSideBar = () => {
         $(".content").css("margin-left","18%");
     }
 };
+
+// for modal
+
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+// + opening the modal
+btn.onclick = function() {
+    modal.style.display = "block";
+}
+
+// X button-> close
+span.onclick = function() {
+    modal.style.display = "none";
+}
+
+//clicking outside the box
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}

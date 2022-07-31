@@ -13,4 +13,7 @@ public interface MealRepository extends JpaRepository<Meal, Integer>{
 	
 	@Query("select u from Meal u where u.messName = :messName")
 	public List<Meal> getMealByMessName(@Param("messName") String messName);
+
+	@Query("select u from Meal u where u.messName = :messName and u.day = :day")
+	public Meal getMealByDay_MessName(@Param("messName") String messName, @Param("day") String day);
 }
