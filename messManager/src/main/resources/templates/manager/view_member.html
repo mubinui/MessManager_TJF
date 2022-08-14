@@ -29,7 +29,8 @@
                             <td th:text="${c.email}"></td>
                             <td th:text="${c.phone}"></td>
                             <td>
-                                <button class="btn btn-primary btn-sm">Manage</button>
+                                <a th:href="@{'/manager/delete/'+ ${c.id}}" class="btn btn-danger btn-sm">Delete</a>
+                                <a th:href="@{'/manager/update/'+ ${c.id}}" class="btn btn-primary btn-sm">Update</a>
                             </td>
 
                         </tr>

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" th:replace="manager/base::Layout(~{::section})">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+</head>
+<body>
+<section class="bg_banner">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 offset-md-2">
+                <div class="my-card mt-5">
+                    <h1 class="text-center">Update Member Info</h1>
+
+                    <form action="" th:action="@{'/manager/update_member_info/' + ${Member.id}}" method="post"
+                          th:object="${Member}">
+
+                        <!--Meal field-->
+
+                        <div class="form-group">
+                            <label for="phone">Phone:</label>
+                            <input name="phone" type="text" class="form-control"
+                                   id="phone" placeholder="enter here" required th:value="${Member.phone}"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email:</label>
+                            <input name="email" type="text" class="form-control"
+                                   id="email" placeholder="enter here" required th:value="${Member.email}"/>
+                        </div>
+
+                        <!-- buttons field -->
+
+                        <div class="container">
+                            <button type="submit" class="btn bg-primary text-white">Submit</button>
+                            <button type="reset" class="btn btn-warning">reset</button>
+                            <a th:href="@{/manager/view-member}" type="button" class="btn btn-danger cancleBtn ">cancel</a>
+                        </div>
+
+                    </form>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

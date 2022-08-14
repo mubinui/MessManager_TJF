@@ -280,5 +280,36 @@ public class ManagerController {
 
 		return "manager/view_meal_chart_PerMember";
 	}
+	@GetMapping("/delete/{id}")
+	public String deleteUser(@PathVariable("id") Integer id, Model model, Principal principal, HttpSession session){
 
+		String managerEmail = principal.getName();
+		Manager manager = repository.getUserByUserName(managerEmail);
+
+		Optional<Member> memberOptional = this.memberRepository.findById(id);
+		Member member = memberOptional.get();
+		if (manager.getId() == member.getManager().getId()) {
+			this.memberRepository.delete(member);
+		}
+		session.setAttribute("message", new messages("Member deleted...", "success"));
+		return "redirect:/manager/view-member";
+	}
+
+	@RequestMapping("/update/{id}")
+	public String updateMemberView(@PathVariable("id") Integer id, Model model){
+		Optional<Member> memberOptional = this.memberRepository.findById(id);
+		Member member = memberOptional.get();
+		model.addAttribute("Member",member);
+		return "manager/update_member_info";
+	}
+
+	@PostMapping("/update_member_info/{id}")
+	public  String updateMemberInfo(@PathVariable("id") Integer id, @ModelAttribute("Member")Member Update_member, HttpSession session){
+		Optional<Member> memberOptional = this.memberRepository.findById(id);
+		Member member = memberOptional.get();
+		member.setPhone(Update_member.getPhone());
+		member.setEmail(Update_member.getEmail());
+		this.memberRepository.save(member);
+		return "redirect:/manager/view-member";
+	}
 }

@@ -150,5 +150,4 @@ public class MemberController {
 
         return "member/view_meal_chart";
     }
-
 }
